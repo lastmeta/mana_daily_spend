@@ -85,6 +85,11 @@ class MainApp(App):
             font_size=24,
             size_hint=(.5, .5),
             pos_hint={'center_x': .5, 'center_y': .5})
+        self.spent_label = Label(
+            text=self.get_saved(key='spent', name='amount'),
+            font_size=24,
+            size_hint=(.5, .5),
+            pos_hint={'center_x': .5, 'center_y': .5})
         self.spent_input = TextInput(
             multiline=False,
             readonly=False,
@@ -101,6 +106,7 @@ class MainApp(App):
         left_layout.add_widget(budget_button)
 
         right_layout.add_widget(spent_name)
+        right_layout.add_widget(self.spent_label)
         right_layout.add_widget(self.spent_input)
         right_layout.add_widget(spent_button)
 
@@ -115,7 +121,7 @@ class MainApp(App):
 
     def on_press_surplus(self, instance):
         try:
-            self.surplus_amount.text = int(self.surplus_input.text)
+            self.surplus_amount.text = str(float(self.surplus_input.text))
             self.update_saved(
                 key='surplus',
                 name='amount',
@@ -126,7 +132,7 @@ class MainApp(App):
 
     def on_press_budget(self, instance):
         try:
-            self.budget_label.text = int(self.budget_input.text)
+            self.budget_label.text = str(int(self.budget_input.text))
             self.update_saved(
                 key='budget',
                 name='amount',
@@ -134,21 +140,29 @@ class MainApp(App):
         except:
             pass
         self.budget_input.text = ''
+
     def on_press_spent(self, instance):
         try:
+            last_spent = float(self.spent_input.text)
             surplus = self.get_saved(key='surplus', name='amount')
-            surplus = str(float(surplus or 0) - float(self.spent_input.text))
+            surplus = str(float(surplus or 0) - last_spent)
             self.surplus_amount.text = surplus
+            self.spent_label.text = self.spent_input.text
             self.update_saved(
                 key='surplus',
                 name='amount',
                 value=surplus)
+            self.update_saved(
+                key='spent',
+                name='amount',
+                value=last_spent)
         except:
             pass
         self.spent_input.text = ''
 
 
     def make_budget(self):
+        self.store.put('spent', amount=0)
         self.store.put('budget', amount=20)
         self.store.put('surplus', amount=0)
         self.store.put('updated',
