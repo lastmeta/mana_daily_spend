@@ -1,11 +1,10 @@
-import random
+import datetime as dt
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.storage.jsonstore import JsonStore
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
-import datetime as dt
 
 
 class MainApp(App):
