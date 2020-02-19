@@ -18,7 +18,7 @@ class MainApp(App):
 
     def update_surplus(self):
         last_updated = self.get_saved(key='updated', name='amount')
-        last_updated = dt.datetime.strptime(last_updated, '%Y-%m-%d %H:%M')
+        last_updated = dt.datetime.strptime(last_updated, '%Y-%m-%d')
         days = (dt.datetime.now() - last_updated).days
         surplus = float(self.get_saved(key='surplus', name='amount'))
         surplus += days * float(self.get_saved(key='budget', name='amount'))
@@ -26,7 +26,7 @@ class MainApp(App):
         self.update_saved(
             key='updated',
             name='amount',
-            value=dt.datetime.now().strftime('%Y-%m-%d %H:%M'))
+            value=dt.datetime.now().strftime('%Y-%m-%d'))
 
     def build(self):
         self.initialize()
@@ -165,7 +165,7 @@ class MainApp(App):
         self.store.put('budget', amount=20)
         self.store.put('surplus', amount=0)
         self.store.put('updated',
-            amount=dt.datetime.now().strftime('%Y-%m-%d %H:%M'))
+            amount=dt.datetime.now().strftime('%Y-%m-%d'))
 
     def get_saved(self, key: str, name: str):
         if self.store.exists(key):
