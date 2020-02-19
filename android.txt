@@ -1,0 +1,3 @@
+title=Mana Daily Spend
+author=Jordan Miller
+orientation=portrait
