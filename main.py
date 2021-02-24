@@ -49,8 +49,8 @@ class ManaDailySpend(App):
 
         surplus_label = Label(
             text='surplus',
-            font_size=24,
-            size_hint=(.2, .2),
+            font_size=55,
+            size_hint=(.5, .5),
             pos_hint={'center_x': .5, 'center_y': .5})
         self.surplus_amount = Label(
             text=ManaDailySpend.str_int(self.get_saved(key='surplus', name='amount')),
@@ -62,12 +62,10 @@ class ManaDailySpend(App):
             readonly=False,
             input_filter='int',
             halign="right",
-            size_hint=(.5, .2),
             pos_hint={'center_x': .5, 'center_y': .5},
-            font_size=24,)
+            font_size=55,)
         surplus_button = Button(
             text="Change",
-            size_hint=(.5, .2),
             pos_hint={'center_x': .5, 'center_y': .5},
             background_color=[0,1,1,1])
         surplus_button.bind(on_press=self.on_press_surplus)
@@ -75,12 +73,12 @@ class ManaDailySpend(App):
 
         budget_name = Label(
             text='Daily Limit',
-            font_size=24,
+            font_size=55,
             size_hint=(.5, .5),
             pos_hint={'center_x': .5, 'center_y': .5})
         self.budget_label = Label(
             text=ManaDailySpend.str_int(self.get_saved(key='budget', name='amount')),
-            font_size=24,
+            font_size=55,
             size_hint=(.5, .5),
             pos_hint={'center_x': .5, 'center_y': .5})
         self.budget_input = TextInput(
@@ -97,12 +95,12 @@ class ManaDailySpend(App):
 
         spent_name = Label(
             text='Spent Amount',
-            font_size=24,
+            font_size=55,
             size_hint=(.5, .5),
             pos_hint={'center_x': .5, 'center_y': .5})
         self.spent_label = Label(
             text=ManaDailySpend.str_int(self.get_saved(key='spent', name='amount')),
-            font_size=24,
+            font_size=55,
             size_hint=(.5, .5),
             pos_hint={'center_x': .5, 'center_y': .5})
         self.spent_input = TextInput(
@@ -118,8 +116,8 @@ class ManaDailySpend(App):
         spent_button.bind(on_press=self.on_press_spent)
         self.spent_input.bind(on_text_validate=self.on_press_spent)
 
-        buttup = Button(text='↑ Increase', font_size=32, background_color=[1,0,1,1])
-        buttdn = Button(text='↓ Decrease', font_size=32, background_color=[1,1,0,1])
+        buttup = Button(text='Increase', background_color=[1,0,1,1])
+        buttdn = Button(text='Decrease', background_color=[1,1,0,1])
         buttup.bind(on_press=self.button_up)
         buttdn.bind(on_press=self.button_dn)
 
